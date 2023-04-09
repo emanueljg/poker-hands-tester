@@ -1,6 +1,5 @@
-from dataclasses import dataclass, field
-from typing import Optional, ClassVar
-from pprint import pprint
+from dataclasses import dataclass
+from typing import Optional
 from functools import total_ordering
 import itertools
 
@@ -183,7 +182,6 @@ class Judge:
         if (cc := Card.comp(pcomb, acomb)) is not None:
             return cc
         else:
-            print('going')
             return Judge.j_high_card(p, a)
         
     def j_straight_flush(p, a): 
@@ -229,8 +227,6 @@ class Judge:
         cc2 = Card.comp(pp2[0], ap2[0])
         if cc2 is not None: return cc2
 
-        print('hi', p, a)
-
         return Judge.j_high_card(p, a)
 
     def j_one_pair(p, a): 
@@ -239,7 +235,6 @@ class Judge:
     def j_high_card(p, a):
         for pc, ac in zip(p.desc_cards, a.desc_cards):
             if (cc := Card.comp(pc, ac)) is not None:
-                print(pc, ac, cc)
                 return cc
         else:
             return None
