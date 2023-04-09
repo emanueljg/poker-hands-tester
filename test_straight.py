@@ -20,7 +20,7 @@ class TestStraight:
 
         mk_tester(p, a, Hand.straight)
 
-    def test_ace(self):
+    def test_ace_high(self):
         p = Hand(set((
             Card(CLUBS, ACE),
             Card(DIAMONDS, KING),
@@ -35,6 +35,25 @@ class TestStraight:
             Card(HEARTS, JACK),
             Card(CLUBS, TEN),
             Card(CLUBS, NINE)
+        )))        
+
+        mk_tester(p, a, Hand.straight)
+
+    def test_ace_low(self):
+        p = Hand(set((
+            Card(CLUBS, ACE),
+            Card(DIAMONDS, KING),
+            Card(HEARTS, QUEEN),
+            Card(CLUBS, JACK),
+            Card(CLUBS, TEN)
+        )))        
+
+        a = Hand(set((
+            Card(CLUBS, ACE),
+            Card(DIAMONDS, TWO),
+            Card(HEARTS, THREE),
+            Card(CLUBS, FOUR),
+            Card(CLUBS, FIVE)
         )))        
 
         mk_tester(p, a, Hand.straight)

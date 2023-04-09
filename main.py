@@ -28,10 +28,10 @@ class Rank:
         return self.name or str(self.value)
 
     def __lt__(self, other) -> bool:
-        return self.value < other.value
+        return self.value < other
 
     def __eq__(self, other) -> bool:
-        return self.value == other.value
+        return self.value == other
 
 
 @total_ordering
@@ -51,10 +51,10 @@ class Card:
         return self.rank.value 
 
     def __lt__(self, other) -> bool:
-        return self.value < other.value
+        return self.value < other
 
     def __eq__(self, other) -> bool:
-        return self.value == other.value
+        return self.value == other
         
     
     @staticmethod
@@ -128,15 +128,27 @@ class Hand:
         return next(iter(self._combinations(3)), None)
 
     def _straight(self, hand) -> Optional[tuple[Card]]:
-        cards = sorted(list(hand.cards), key=lambda c: c.rank.value)
-        top, bottom = cards[-1], cards[0]
+        cards = hand.asc_cards
+        bottom, top = cards[0], cards[-1]
         if top.rank.value - bottom.rank.value == 4:
             return tuple(cards)
 
-    def straight(self) -> Optional[tuple[Card]]:
+    def straight(self, introspect=False) -> Optional[tuple[Card]]:
         high_ace_straight = self._straight(self.with_high_aces())
         low_ace_straight = self._straight(self.with_low_aces())
-        return high_ace_straight or low_ace_straight
+
+        # standard
+        if not introspect:
+            return high_ace_straight or low_ace_straight
+
+        # used when testing
+        if introspect and high_ace_straight:
+            return 'high-ace'
+        if introspect and low_ace_straight and high_ace_straight:
+            return 'no-ace'
+        if introspect and low_ace_straight:
+            return 'low-ace'
+                                
 
     def flush(self) -> Optional[set[Card]]:
         suit = next(iter(self.cards)).suit
@@ -190,8 +202,18 @@ class Judge:
         return Judge.j_high_card(p, a)
 
     def j_straight(p, a): 
-        pc = p.high_card()
-        ac = a.high_card()
+        # this entire method SHOULD just be a simple high-card check,
+        # but the fact that you can have both high and low straights requires
+        # peeking into what kind of straight Hand.straight got, otherwise
+        # we get a tie when we compare two hands that both have aces.
+        # low ace straight is the worst possible straight so therefore
+        # we set that card  to -1 to enforce lowest value
+        ps = p.straight(introspect=True)
+        # as is a reserved keyword
+        _as = a.straight(introspect=True)
+        
+        pc = p.high_card() if ps != 'low-ace' else -1
+        ac = a.high_card() if _as != 'low-ace' else -1  
 
         return Card.comp(pc, ac)
 
