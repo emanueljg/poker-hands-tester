@@ -16,8 +16,6 @@ Check the tests for details on usage.
 
 ## Test (unix)
 ```sh
-# clone
-git clone https://www.github.com/emanueljg/poker-hands-tester
 cd poker-hands-tester 
 
 # make virtual environment
