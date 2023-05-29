@@ -2,7 +2,7 @@ from lib import *
 
 class TestStraight:
     def test_simple(self):
-        p = Hand(set((
+        p = Hand(list((
             Card(CLUBS, THREE),
             Card(DIAMONDS, FOUR),
             Card(HEARTS, FIVE),
@@ -10,18 +10,18 @@ class TestStraight:
             Card(CLUBS, SEVEN)
         )))        
 
-        a = Hand(set((
-            Card(CLUBS, TWO),
+        a = Hand(list((
+            Card(HEARTS, TWO),
             Card(DIAMONDS, THREE),
             Card(HEARTS, FOUR),
             Card(CLUBS, FIVE),
-            Card(CLUBS, SIX)
+            Card(HEARTS, SIX)
         )))        
 
         mk_tester(p, a, Hand.straight)
 
     def test_ace_high(self):
-        p = Hand(set((
+        p = Hand(list((
             Card(CLUBS, ACE),
             Card(DIAMONDS, KING),
             Card(HEARTS, QUEEN),
@@ -29,18 +29,18 @@ class TestStraight:
             Card(CLUBS, TEN)
         )))        
 
-        a = Hand(set((
+        a = Hand(list((
             Card(CLUBS, KING),
             Card(DIAMONDS, QUEEN),
             Card(HEARTS, JACK),
-            Card(CLUBS, TEN),
+            Card(HEARTS, TEN),
             Card(CLUBS, NINE)
         )))        
 
         mk_tester(p, a, Hand.straight)
 
     def test_ace_low(self):
-        p = Hand(set((
+        p = Hand(list((
             Card(CLUBS, ACE),
             Card(DIAMONDS, KING),
             Card(HEARTS, QUEEN),
@@ -48,8 +48,8 @@ class TestStraight:
             Card(CLUBS, TEN)
         )))        
 
-        a = Hand(set((
-            Card(CLUBS, ACE),
+        a = Hand(list((
+            Card(DIAMONDS, ACE),
             Card(DIAMONDS, TWO),
             Card(HEARTS, THREE),
             Card(CLUBS, FOUR),
@@ -59,7 +59,7 @@ class TestStraight:
         mk_tester(p, a, Hand.straight)
 
     def test_tie(self):
-        p = Hand(set((
+        p = Hand(list((
             Card(CLUBS, THREE),
             Card(DIAMONDS, FOUR),
             Card(HEARTS, FIVE),
@@ -67,11 +67,11 @@ class TestStraight:
             Card(CLUBS, SEVEN)
         )))        
 
-        a = Hand(set((
-            Card(CLUBS, THREE),
-            Card(DIAMONDS, FOUR),
-            Card(HEARTS, FIVE),
-            Card(CLUBS, SIX),
+        a = Hand(list((
+            Card(HEARTS, THREE),
+            Card(CLUBS, FOUR),
+            Card(DIAMONDS, FIVE),
+            Card(HEARTS, SIX),
             Card(DIAMONDS, SEVEN)
         )))        
 

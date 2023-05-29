@@ -1,7 +1,12 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, InitVar, field
 from typing import Optional
 from functools import total_ordering
 import itertools
+
+
+class DuplicateCardsException(Exception):
+    pass
+
 
 @dataclass(eq=True, frozen=True)
 class Suit:
@@ -54,7 +59,6 @@ class Card:
 
     def __eq__(self, other) -> bool:
         return self.value == other
-        
     
     @staticmethod
     def comp(x, y):
@@ -65,7 +69,23 @@ class Card:
 
 @dataclass
 class Hand:
-    cards: set[Card]
+    # to fix the potential issue of a hand being initialized
+    # with duplicate cards, we need to guard against that.
+    # But using a set fails silently. So what we end up doing
+    # is INTERNALLY storing it as a set, but in the initializer
+    # ask for a list so we can dupe check when converting it to a set.
+    _cards: InitVar[list[Card]]
+    cards: set[Card] = field(init=False)
+
+    def __post_init__(self, _cards: list[Card]):
+        cards_set = set(_cards)
+        cards_list = _cards
+
+        if len(cards_set) < len(cards_list): # has dupes!
+            raise DuplicateCardsException
+
+        self.cards = cards_set
+    
 
     @property
     def asc_cards(self) -> list[Card]:
@@ -257,6 +277,15 @@ class Judge:
                 return worth, form
 
     def judge(protag: Hand, antag: Hand):
+
+        # dupe check
+        p_len = len(protag.cards)
+        a_len = len(antag.cards)
+        pa_len = len(protag.cards | antag.cards)
+        print(pa_len, p_len, a_len)
+        if pa_len != (p_len + a_len):
+            raise DuplicateCardsException
+        
         p_worth, p_form = Judge.best_of_hand(protag)
         a_worth, a_form = Judge.best_of_hand(antag)
         if p_worth < a_worth: return 'win'

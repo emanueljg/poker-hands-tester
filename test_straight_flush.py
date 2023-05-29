@@ -2,7 +2,7 @@ from lib import *
 
 class TestStraightFlush:
     def test_simple(self):
-        p = Hand(set((
+        p = Hand(list((
             Card(CLUBS, THREE),
             Card(CLUBS, FOUR),
             Card(CLUBS, FIVE),
@@ -10,18 +10,18 @@ class TestStraightFlush:
             Card(CLUBS, SEVEN)
         )))        
 
-        a = Hand(set((
-            Card(CLUBS, TWO),
-            Card(CLUBS, THREE),
-            Card(CLUBS, FOUR),
-            Card(CLUBS, FIVE),
-            Card(CLUBS, SIX)
+        a = Hand(list((
+            Card(SPADES, TWO),
+            Card(SPADES, THREE),
+            Card(SPADES, FOUR),
+            Card(SPADES, FIVE),
+            Card(SPADES, SIX)
         )))        
 
         mk_tester(p, a, Hand.straight_flush)
 
     def test_ace(self):
-        p = Hand(set((
+        p = Hand(list((
             Card(CLUBS, ACE),
             Card(CLUBS, KING),
             Card(CLUBS, QUEEN),
@@ -29,18 +29,18 @@ class TestStraightFlush:
             Card(CLUBS, TEN)
         )))        
 
-        a = Hand(set((
-            Card(CLUBS, KING),
-            Card(CLUBS, QUEEN),
-            Card(CLUBS, JACK),
-            Card(CLUBS, TEN),
-            Card(CLUBS, NINE)
+        a = Hand(list((
+            Card(DIAMONDS, KING),
+            Card(DIAMONDS, QUEEN),
+            Card(DIAMONDS, JACK),
+            Card(DIAMONDS, TEN),
+            Card(DIAMONDS, NINE)
         )))        
 
         mk_tester(p, a, Hand.straight_flush)
 
     def test_tie(self):
-        p = Hand(set((
+        p = Hand(list((
             Card(CLUBS, THREE),
             Card(CLUBS, FOUR),
             Card(CLUBS, FIVE),
@@ -48,7 +48,7 @@ class TestStraightFlush:
             Card(CLUBS, SEVEN)
         )))        
 
-        a = Hand(set((
+        a = Hand(list((
             Card(HEARTS, THREE),
             Card(HEARTS, FOUR),
             Card(HEARTS, FIVE),

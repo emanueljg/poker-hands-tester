@@ -1,14 +1,14 @@
 from lib import *
 
-hand1 = Hand(set((
+hand1 = Hand(list((
     Card(HEARTS, KING),
-    Card(CLUBS, QUEEN),
+    Card(DIAMONDS, QUEEN),
     Card(SPADES, SEVEN),
     Card(SPADES, FOUR),
     Card(HEARTS, THREE)
 )))
 
-hand1a = Hand(set((
+hand1a = Hand(list((
     Card(HEARTS, KING),
     Card(CLUBS, QUEEN),
     Card(SPADES, SEVEN),
@@ -16,7 +16,7 @@ hand1a = Hand(set((
     Card(HEARTS, TWO)
 )))
 
-hand2 = Hand(set((
+hand2 = Hand(list((
     Card(SPADES, TEN),
     Card(HEARTS, TEN),
     Card(SPADES, EIGHT),
@@ -24,7 +24,7 @@ hand2 = Hand(set((
     Card(CLUBS, FOUR)
 )))
 
-hand3 = Hand(set((
+hand3 = Hand(list((
     Card(HEARTS, JACK),
     Card(SPADES, JACK),
     Card(CLUBS, THREE),
@@ -32,7 +32,7 @@ hand3 = Hand(set((
     Card(HEARTS, TWO)
 )))
 
-hand4 = Hand(set((
+hand4 = Hand(list((
     Card(CLUBS, QUEEN),
     Card(SPADES, QUEEN),
     Card(HEARTS, QUEEN),
@@ -40,7 +40,7 @@ hand4 = Hand(set((
     Card(SPADES, TWO)
 )))
 
-hand5 = Hand(set((
+hand5 = Hand(list((
     Card(DIAMONDS, TEN),
     Card(SPADES, NINE),
     Card(HEARTS, EIGHT),
@@ -48,7 +48,7 @@ hand5 = Hand(set((
     Card(CLUBS, SIX)
 )))
 
-hand6 = Hand(set((
+hand6 = Hand(list((
     Card(DIAMONDS, JACK),
     Card(DIAMONDS, NINE),
     Card(DIAMONDS, EIGHT),
@@ -56,15 +56,15 @@ hand6 = Hand(set((
     Card(DIAMONDS, THREE)
 )))
 
-hand7 = Hand(set((
+hand7 = Hand(list((
     Card(SPADES, SIX),
     Card(HEARTS, SIX),
     Card(DIAMONDS, SIX),
     Card(CLUBS, KING),
-    Card(HEARTS, KING)
+    Card(DIAMONDS, KING)
 )))
 
-hand8 = Hand(set((
+hand8 = Hand(list((
     Card(CLUBS, FIVE),
     Card(DIAMONDS, FIVE),
     Card(HEARTS, FIVE),
@@ -72,7 +72,7 @@ hand8 = Hand(set((
     Card(CLUBS, TWO)
 )))
 
-hand9 = Hand(set((
+hand9 = Hand(list((
     Card(CLUBS, JACK),
     Card(CLUBS, TEN),
     Card(CLUBS, NINE),

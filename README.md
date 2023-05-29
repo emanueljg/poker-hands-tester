@@ -6,7 +6,7 @@ Testing poker hand outcomes in OOP Python.
 ```python
 from main import *
 
-protagonist = Hand(set((Card(...), Card(...), ...)))
+protagonist = Hand(list((Card(...), Card(...), ...)))
 antagonist = ...
 
 print(Judge.judge(protagonist, antagonist))
